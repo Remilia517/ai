@@ -1,6 +1,7 @@
+#參考老師程式碼和chatgpt
+
 import random
 
-# 定義課程、老師和教室
 courses = [
     {'teacher': '甲', 'name': '機率', 'hours': 2},
     {'teacher': '甲', 'name': '線代', 'hours': 3},
@@ -39,14 +40,11 @@ slots = [
     'B51', 'B52', 'B53', 'B54', 'B55', 'B56', 'B57',
 ]
 
-# 隨機打亂課程列表
 random.shuffle(courses)
 
-# 初始化每個老師的時間表和教室的時間表
 teacher_schedule = {teacher: [] for teacher in teachers}
-room_schedule = {slot: '無' for slot in slots}  # 初始所有時段為無
+room_schedule = {slot: '無' for slot in slots}
 
-# 將時段劃分為每天的時間段
 days = {
     'A': [['A11', 'A12', 'A13', 'A14', 'A15', 'A16', 'A17'],
           ['A21', 'A22', 'A23', 'A24', 'A25', 'A26', 'A27'],
@@ -60,24 +58,21 @@ days = {
           ['B51', 'B52', 'B53', 'B54', 'B55', 'B56', 'B57']]
 }
 
-# 嘗試排課
 for course in courses:
     teacher = course['teacher']
     hours = course['hours']
     scheduled = False
 
-    # 遍歷每個教室的每天的時段
     for room in days:
         for day_slots in days[room]:
             if len(day_slots) < hours:
-                continue  # 如果當天的時段少於課程時數，跳過
+                continue 
             
             for i in range(len(day_slots) - hours + 1):
                 consecutive_slots = day_slots[i:i + hours]
                 
-                # 檢查這些時段是否全部可用，且老師這些時段也空閒
                 if all(room_schedule[slot] == '無' for slot in consecutive_slots) and all(slot not in teacher_schedule[teacher] for slot in consecutive_slots):
-                    # 安排課程到這些時段
+                    
                     for slot in consecutive_slots:
                         room_schedule[slot] = course['name']
                         teacher_schedule[teacher].append(slot)
@@ -90,7 +85,6 @@ for course in courses:
     
     if not scheduled:
         print(f"無法為課程 {course['name']} 安排時間。")
-
-# 輸出排課結果
+        
 for slot, course in sorted(room_schedule.items()):
     print(f"{slot}: {course}")
