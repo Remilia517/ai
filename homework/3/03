@@ -1,5 +1,3 @@
-#參考chatgpt
-
 def pivot(T, row, col):
     pivot_element = T[row][col]
     T[row] = [x / pivot_element for x in T[row]]

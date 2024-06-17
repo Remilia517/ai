@@ -1,5 +1,3 @@
-#參考老師程式碼和chatgpt
-
 import random
 
 courses = [
