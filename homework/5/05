@@ -1,4 +1,4 @@
-#參考老師程式碼和chatgpt
+#參考老師和chatgpt程式碼
 
 import numpy as np
 from numpy.linalg import norm

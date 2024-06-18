@@ -1,0 +1,27 @@
+#參考Chatgpt以進行改良
+
+import gymnasium as gym
+
+env = gym.make("CartPole-v1", render_mode="human")
+observation, info = env.reset(seed=42)
+durations = []
+for _ in range(10):
+    total_time = 0
+    while True:
+        env.render()
+        pole_angle = observation[2]
+        action = 1 if pole_angle > 0 else 0
+
+        observation, reward, terminated, truncated, info = env.step(action)
+        total_time += 1
+        
+        if terminated or truncated:
+            durations.append(total_time)
+            observation, info = env.reset()
+            break
+         
+env.close()
+
+
+for i, duration in enumerate(durations):
+    print(f'Run {i+1}: Lasted {duration} steps')

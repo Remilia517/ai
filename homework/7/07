@@ -1,4 +1,4 @@
-#參考同學程式碼和chatgpt
+#參考同學和chatgpt的程式碼
 
 import tensorflow as tf
 from tensorflow.keras.datasets import mnist
